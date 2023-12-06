@@ -26,7 +26,7 @@ for i in range(1000):  # 1000 iterations
     track.append(Message('note_on', note=note, velocity=64, time=0))
     track.append(Message('note_off', note=note, velocity=64, time=duration))
     if duration > 80:
-        duration -= 10
+        duration -= 1
     # duration -= math.ceil((960 - 60)/1000)
 
 print(duration)
