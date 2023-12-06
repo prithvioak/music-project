@@ -8,7 +8,7 @@ import math
 mid = MidiFile()
 track = MidiTrack()
 mid.tracks.append(track)
-
+d_major = [26, 28, 30, 31, 33, 35, 37, 38, 40, 42, 43, 45, 47, 49, 50, 52, 54, 55, 57, 59, 61, 62, 64, 66, 67, 69, 71, 73, 74, 76, 78, 79, 81, 83, 85, 86, 88, 90, 91, 93, 95, 97, 98, 100, 102, 103, 105, 107, 109, 110, 112, 114, 115, 117, 119]
 center = 73
 current = 74
 duration = 960
@@ -24,8 +24,9 @@ for i in range(700):  # 1000 iterations
     #     low -= 1
     #     high += 1
     # Adding the note on and off events to the track
-    track.append(Message('note_on', note=current, velocity=64, time=0))
-    track.append(Message('note_off', note=current, velocity=64, time=duration))
+    note_to_add = min(d_major, key=lambda x:abs(x-current))
+    track.append(Message('note_on', note=note_to_add, velocity=64, time=0))
+    track.append(Message('note_off', note=note_to_add, velocity=64, time=duration))
     if current > center:
         current += random.choices([-1, 0, 1], [prob_to_center, 0.1, 0.9-prob_to_center])[0]
     elif current < center:
@@ -53,8 +54,9 @@ for i in range(700):  # 1000 iterations
     #     low -= 1
     #     high += 1
     # Adding the note on and off events to the track
-    track.append(Message('note_on', note=current, velocity=64, time=0))
-    track.append(Message('note_off', note=current, velocity=64, time=duration))
+    note_to_add = min(d_major, key=lambda x:abs(x-current))
+    track.append(Message('note_on', note=note_to_add, velocity=64, time=0))
+    track.append(Message('note_off', note=note_to_add, velocity=64, time=duration))
     if current > center:
         current += random.choices([-1, 0, 1], [prob_to_center, 0.1, 0.9-prob_to_center])[0]
     elif current < center:
@@ -74,7 +76,7 @@ for i in range(700):  # 1000 iterations
 print(prob_to_center)
 
 # Save the MIDI file
-mid.save(os.path.join('out','markov_midi_sequence.mid'))
+mid.save(os.path.join('out','markov_midi_sequence_d.mid'))
 
 print("MIDI file generated successfully.")
 
@@ -82,7 +84,7 @@ pygame.mixer.init()
 pygame.init()
 
 # Load the MIDI file
-pygame.mixer.music.load(os.path.join('out','markov_midi_sequence.mid'))
+pygame.mixer.music.load(os.path.join('out','markov_midi_sequence_d.mid'))
 
 # Play the MIDI file
 # pygame.mixer.music.play()
