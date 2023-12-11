@@ -54,7 +54,8 @@ for i in range(700):  # 1000 iterations
     #     low -= 1
     #     high += 1
     # Adding the note on and off events to the track
-    note_to_add = min(d_major, key=lambda x:abs(x-current))
+    # note_to_add = min(d_major, key=lambda x:abs(x-current))
+    note_to_add = current
     track.append(Message('note_on', note=note_to_add, velocity=64, time=0))
     track.append(Message('note_off', note=note_to_add, velocity=64, time=duration))
     if current > center:
