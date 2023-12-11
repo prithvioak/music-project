@@ -5,4 +5,5 @@ This is a repository of various scripts I used to generate **random sequences** 
 ![Markov midi sequence](screen_captures/markov_midi_seq.png "Markov midi sequence")
 * Random series: I generated random numbers between a low and a high value. I **varied the width of the envelope with speed**, as shown below:
 ![Markov midi sequence](screen_captures/random_midi_seq.png "Markov midi sequence")
+While initially, the notes are quantized to the D major scale, this quantization is done away with halfway through with the intent of making an unnerving shift.
 I then exported the out files onto a DAW and used them as a basis for my production! This repository also includes the final production output, **created in surround sound but outputted in binaural audio**.
