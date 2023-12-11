@@ -4,7 +4,6 @@ import os
 import pygame
 import math
 
-# Create a new MIDI file with one track
 mid = MidiFile()
 track = MidiTrack()
 mid.tracks.append(track)
@@ -13,17 +12,8 @@ center = 73
 current = 74
 duration = 960
 prob_to_center = 1
-# Generate a random sequence of MIDI notes
-for i in range(700):  # 1000 iterations
-    # Random number of notes between 1 and 5 for each iteration
-    # Generating a random note (MIDI note numbers are in the range 21-108)
-    # note = random.randint(low, high)
-    # Generating a random duration for the note (in ticks, 480 ticks per beat is standard)
-    # duration = random.randint(120, 480)
-    # if i % 20 == 0:
-    #     low -= 1
-    #     high += 1
-    # Adding the note on and off events to the track
+
+for i in range(700):
     track.append(Message('note_on', note=current, velocity=64, time=0))
     track.append(Message('note_off', note=current, velocity=64, time=duration))
     if current > center:

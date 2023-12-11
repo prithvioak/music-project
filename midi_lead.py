@@ -9,43 +9,39 @@ mid = MidiFile()
 track = MidiTrack()
 mid.tracks.append(track)
 
+# lowest possible value for random note
 low = 72
+# hightest posible value for random note
 high = 74
+# duration of note (in ticks, 480 ticks per beat is standard)
 duration = 960
-# Generate a random sequence of MIDI notes
-for i in range(700):  # 30 iterations
-    # Random number of notes between 1 and 5 for each iteration
-    # Generating a random note (MIDI note numbers are in the range 21-108)
+
+# First loop; increasing speed
+for i in range(700):
     note = random.randint(low, high)
-    # Generating a random duration for the note (in ticks, 480 ticks per beat is standard)
-    # duration = random.randint(120, 480)
     if i % 20 == 0:
+        # increasing width of the envelope
         low -= 1
         high += 1
     # Adding the note on and off events to the track
     track.append(Message('note_on', note=note, velocity=64, time=0))
     track.append(Message('note_off', note=note, velocity=64, time=duration))
+    # increasing speed
     if duration > 80:
         duration -= 7
-    # duration -= math.ceil((960 - 60)/1000)
 
-# Generate a random sequence of MIDI notes
-for i in range(700):  # 1000 iterations
-    # Random number of notes between 1 and 5 for each iteration
-    # Generating a random note (MIDI note numbers are in the range 21-108)
+# Second loop; decreasing speed
+for i in range(700):
     note = random.randint(low, high)
-    # Generating a random duration for the note (in ticks, 480 ticks per beat is standard)
-    # duration = random.randint(120, 480)
     if i % 20 == 0:
+        # decreasing width of the envelope
         low += 1
         high -= 1
-    # Adding the note on and off events to the track
     track.append(Message('note_on', note=note, velocity=64, time=0))
     track.append(Message('note_off', note=note, velocity=64, time=duration))
+    # decreasing speed
     if duration < 960 and i > 575:
         duration += 7
-
-# print(duration)
 
 # Save the MIDI file
 mid.save(os.path.join('out','random_midi_sequence.mid'))
